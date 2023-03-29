@@ -1,0 +1,5 @@
+CREATE SEQUENCE "users_sequence"
+START 1
+INCREMENT 1
+MINVALUE 1
+OWNED BY users.id;
