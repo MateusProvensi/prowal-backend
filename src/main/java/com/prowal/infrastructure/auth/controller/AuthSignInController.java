@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prowal.usecases.auth.SignUpAuthUseCase;
-import com.prowal.vos.v1.input.auth.SignUpVOInput;
+import com.prowal.usecases.auth.SignInAuthUseCase;
+import com.prowal.vos.v1.input.auth.SignInVOInput;
 import com.prowal.vos.v1.output.auth.TokenVO;
 
 import jakarta.validation.Valid;
 
 @RestController
-public class AuthSignUpController {
+public class AuthSignInController {
 
-	SignUpAuthUseCase signUpAuthUseCase;
+	SignInAuthUseCase signInAuthUseCase;
 	
-	public AuthSignUpController(SignUpAuthUseCase signUpAuthUseCase) {
-		this.signUpAuthUseCase = signUpAuthUseCase;
+	public AuthSignInController(SignInAuthUseCase signInAuthUseCase) {
+		this.signInAuthUseCase = signInAuthUseCase;
 	}
-
-	@PostMapping(path = "auth/signup")
-	public ResponseEntity<TokenVO> signUp(@RequestBody @Valid SignUpVOInput data) {
-		TokenVO tokenVO = signUpAuthUseCase.signUp(data);
+	
+	@PostMapping(path = "auth/signin")
+	public ResponseEntity<TokenVO> signUp(@RequestBody @Valid SignInVOInput data) {
+		TokenVO tokenVO = signInAuthUseCase.signin(data.getUserName(), data.getPassword());
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(tokenVO);
 	}

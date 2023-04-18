@@ -7,11 +7,12 @@ import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 
 public class DozerMapper {
-	private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+	private static Mapper mapper = DozerBeanMapperBuilder.create().build();
 
 	public static <O, D> D parseObject(O origin, Class<D> destination) {
-		if (origin == null) return null;
-		
+		if (origin == null)
+			return null;
+
 		return mapper.map(origin, destination);
 	}
 

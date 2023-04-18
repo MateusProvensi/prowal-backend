@@ -10,10 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.prowal.entities.auth.gateway.AuthGateway;
-import com.prowal.entities.auth.model.vo.v1.TokenVO;
 import com.prowal.entities.user.gateway.UserGateway;
-import com.prowal.entities.user.model.vo.v1.UserVO;
 import com.prowal.infrastructure.config.security.jwt.JwtTokenProvider;
+import com.prowal.vos.v1.output.auth.TokenVO;
+import com.prowal.vos.v1.output.user.UserVOOutput;
 
 @Component
 public class AuthTokenGateway implements AuthGateway {
@@ -39,7 +39,7 @@ public class AuthTokenGateway implements AuthGateway {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, uncodedPassword));
 
-			UserVO userVo = userGateway.findByUsername(userName);
+			UserVOOutput userVo = userGateway.findByUsername(userName);
 
 			if (userVo == null) {
 				throw new UsernameNotFoundException("Username " + userName + " not found!");

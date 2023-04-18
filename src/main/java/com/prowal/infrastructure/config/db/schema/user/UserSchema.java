@@ -1,4 +1,4 @@
-package com.prowal.infrastructure.config.db.schema;
+package com.prowal.infrastructure.config.db.schema.user;
 
 import java.io.Serializable;
 import java.util.Collection;

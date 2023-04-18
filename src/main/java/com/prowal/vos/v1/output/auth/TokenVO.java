@@ -1,4 +1,4 @@
-package com.prowal.entities.auth.model.vo.v1;
+package com.prowal.vos.v1.output.auth;
 
 import java.io.Serializable;
 import java.util.Date;

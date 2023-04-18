@@ -6,10 +6,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.prowal.entities.user.gateway.UserGateway;
-import com.prowal.entities.user.model.vo.v1.UserVO;
 import com.prowal.infrastructure.config.db.repositories.UserRepository;
-import com.prowal.infrastructure.config.db.schema.UserSchema;
+import com.prowal.infrastructure.config.db.schema.user.UserSchema;
 import com.prowal.infrastructure.config.mapper.DozerMapper;
+import com.prowal.vos.v1.input.user.UserVOInput;
+import com.prowal.vos.v1.output.user.UserVOOutput;
 
 @Component
 public class UserDatabaseGateway implements UserGateway, UserDetailsService {
@@ -21,12 +22,12 @@ public class UserDatabaseGateway implements UserGateway, UserDetailsService {
 	}
 	
 	@Override
-	public UserVO create(UserVO userVO) {
+	public UserVOOutput create(UserVOInput userVO) {
 		UserSchema entity = DozerMapper.parseObject(userVO, UserSchema.class);
 
 		UserSchema persistedEntity = userRepository.save(entity);
 		
-		UserVO vo = DozerMapper.parseObject(persistedEntity, UserVO.class);
+		UserVOOutput vo = DozerMapper.parseObject(persistedEntity, UserVOOutput.class);
 
 		// vo.add(linkTo(methodOn(UserController.class).findById(vo.getKey())).withSelfRel());
 		
@@ -34,10 +35,10 @@ public class UserDatabaseGateway implements UserGateway, UserDetailsService {
 	}
 
 	@Override
-	public UserVO findByUsername(String username) {
+	public UserVOOutput findByUsername(String username) {
 		UserSchema user = userRepository.findByUserName(username);
 
-		return DozerMapper.parseObject(user, UserVO.class);
+		return DozerMapper.parseObject(user, UserVOOutput.class);
 	}
 
 	@Override

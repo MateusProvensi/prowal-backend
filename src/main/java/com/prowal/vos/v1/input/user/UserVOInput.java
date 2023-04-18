@@ -1,21 +1,18 @@
-package com.prowal.entities.user.model.vo.v1;
+package com.prowal.vos.v1.input.user;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.springframework.hateoas.RepresentationModel;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.dozermapper.core.Mapping;
 
-public class UserVO extends RepresentationModel<UserVO> implements Serializable {
+//public class UserVOInput extends RepresentationModel<UserVOInput> implements Serializable {
+public class UserVOInput implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Mapping(value = "id")
-	@JsonProperty(value = "id")
-	private Long key;
-	
+	private Long id;
+
 	@Mapping(value = "userName")
 	@JsonProperty(value = "userName")
 	private String userName;
@@ -23,15 +20,15 @@ public class UserVO extends RepresentationModel<UserVO> implements Serializable 
 	private String lastName;
 	private String password;
 
-	public UserVO() {
+	public UserVOInput() {
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
-	public Long getKey() {
-		return key;
-	}
-
-	public void setKey(Long key) {
-		this.key = key;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUserName() {
@@ -68,22 +65,19 @@ public class UserVO extends RepresentationModel<UserVO> implements Serializable 
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(firstName, key, lastName, password, userName);
-		return result;
+		return Objects.hash(firstName, id, lastName, password, userName);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserVO other = (UserVO) obj;
-		return Objects.equals(firstName, other.firstName) && Objects.equals(key, other.key)
+		UserVOInput other = (UserVOInput) obj;
+		return Objects.equals(firstName, other.firstName) && Objects.equals(id, other.id)
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
 				&& Objects.equals(userName, other.userName);
 	}

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.prowal.infrastructure.config.db.schema.UserSchema;
+import com.prowal.infrastructure.config.db.schema.user.UserSchema;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserSchema, Long>{

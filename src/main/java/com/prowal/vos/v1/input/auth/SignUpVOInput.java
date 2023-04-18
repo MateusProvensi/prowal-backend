@@ -1,27 +1,32 @@
-package com.prowal.entities.auth.model.vo.v1;
+package com.prowal.vos.v1.input.auth;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class SignUpVO implements Serializable {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public class SignUpVOInput implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	@NotNull(message = "UserName should not be null")
+	@NotBlank(message = "UserName should not be blank")
 	private String userName;
+	
+	@NotNull(message = "FirstName should not be null")
+	@NotBlank(message = "FirstName should not be blank")
 	private String firstName;
+	
+	@NotNull(message = "LastName should not be null")
+	@NotBlank(message = "LastName should not be blank")
 	private String lastName;
+	
+	@NotNull(message = "Password should not be null")
+	@NotBlank(message = "Password should not be blank")
 	private String password;
 
-	public SignUpVO() {
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+	public SignUpVOInput() {
 	}
 
 	public String getUserName() {
@@ -69,7 +74,7 @@ public class SignUpVO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SignUpVO other = (SignUpVO) obj;
+		SignUpVOInput other = (SignUpVOInput) obj;
 		return Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
 				&& Objects.equals(password, other.password) && Objects.equals(userName, other.userName);
 	}

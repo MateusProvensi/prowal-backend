@@ -23,7 +23,7 @@ import com.prowal.infrastructure.config.security.jwt.JwtTokenProvider;
 
 @EnableWebSecurity
 @Configuration
-public class BeansConfig {
+public class AuthenticationConfig {
 
 	@Autowired
 	private JwtTokenProvider tokenProvider;

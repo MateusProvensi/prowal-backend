@@ -3,7 +3,7 @@ package com.prowal.usecases.auth;
 import org.springframework.stereotype.Service;
 
 import com.prowal.entities.auth.gateway.AuthGateway;
-import com.prowal.entities.auth.model.vo.v1.TokenVO;
+import com.prowal.vos.v1.output.auth.TokenVO;
 
 @Service
 public class SignInAuthUseCase {

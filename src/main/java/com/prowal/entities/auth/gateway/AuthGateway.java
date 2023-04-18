@@ -1,6 +1,6 @@
 package com.prowal.entities.auth.gateway;
 
-import com.prowal.entities.auth.model.vo.v1.TokenVO;
+import com.prowal.vos.v1.output.auth.TokenVO;
 
 public interface AuthGateway {
 	String getEncondedPassword(String password);
