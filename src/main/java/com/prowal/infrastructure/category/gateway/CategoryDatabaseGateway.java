@@ -9,7 +9,7 @@ import com.prowal.entities.category.gateway.CategoryGateway;
 import com.prowal.infrastructure.config.db.repositories.CategoryRepository;
 import com.prowal.infrastructure.config.db.schema.category.CategorySchema;
 import com.prowal.infrastructure.config.exceptions.EntityExistsException;
-import com.prowal.infrastructure.config.mapper.DozerMapper;
+import com.prowal.infrastructure.config.mapper.ModelMapperMaping;
 import com.prowal.vos.v1.input.category.CategoryVOCreateInput;
 import com.prowal.vos.v1.input.category.CategoryVOUpdateInput;
 import com.prowal.vos.v1.output.category.CategoryVOOutput;
@@ -27,30 +27,30 @@ public class CategoryDatabaseGateway implements CategoryGateway {
 	public CategoryVOOutput findById(Long id) {
 		Optional<CategorySchema> category = categoryRepository.findById(id);
 
-		if (category.isEmpty()) {
-			throw new EntityExistsException("The category with ID = " + id + " does not exists.");
-		}
+		CategoryVOOutput categoryVOOutput = category
+				.map(currentCategory -> ModelMapperMaping.parseObject(currentCategory, CategoryVOOutput.class))
+				.orElseThrow(() -> new EntityExistsException("The category with ID = " + id + " does not exists."));
 
-		return DozerMapper.parseObject(category.get(), CategoryVOOutput.class);
+		return categoryVOOutput;
 	}
 
 	@Override
 	public List<CategoryVOOutput> findByUserId(Long userId) {
 		List<CategorySchema> categories = categoryRepository.findByUserId(userId);
 
-		return DozerMapper.parseListObjects(categories, CategoryVOOutput.class);
+		return ModelMapperMaping.parseListObjects(categories, CategoryVOOutput.class);
 	}
 
 	@Override
 	public void createCategory(CategoryVOCreateInput categoryVOInput) {
-		CategorySchema categoryToInsert = DozerMapper.parseObject(categoryVOInput, CategorySchema.class);
+		CategorySchema categoryToInsert = ModelMapperMaping.parseObject(categoryVOInput, CategorySchema.class);
 		
 		categoryRepository.save(categoryToInsert);
 	}
 
 	@Override
 	public void updateCategory(CategoryVOUpdateInput categoryVOInput) {
-		CategorySchema categoryToInsert = DozerMapper.parseObject(categoryVOInput, CategorySchema.class);
+		CategorySchema categoryToInsert = ModelMapperMaping.parseObject(categoryVOInput, CategorySchema.class);
 		
 		categoryRepository.save(categoryToInsert);
 	}

@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.prowal.infrastructure.config.db.schema.category.CategorySchema;
+import com.prowal.infrastructure.config.db.schema.account.AccountSchema;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<CategorySchema, Long> {
-	
-	@Query("SELECT c FROM CategorySchema c INNER JOIN c.user u WHERE u.id = :userId")
-	List<CategorySchema> findByUserId(@Param("userId") Long userId);
+public interface AccountRepository extends JpaRepository<AccountSchema, Long> {
+
+	@Query("SELECT a FROM AccountSchema a INNER JOIN a.user u WHERE u.id = :userId")
+	List<AccountSchema> findByUserId(@Param("userId") Long userId);
 }

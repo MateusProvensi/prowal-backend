@@ -6,7 +6,7 @@ import com.prowal.entities.auth.gateway.AuthGateway;
 import com.prowal.entities.user.gateway.UserGateway;
 import com.prowal.infrastructure.config.exceptions.EntityExistsException;
 import com.prowal.infrastructure.config.exceptions.RequiredObjectIsNullException;
-import com.prowal.infrastructure.config.mapper.DozerMapper;
+import com.prowal.infrastructure.config.mapper.ModelMapperMaping;
 import com.prowal.vos.v1.input.auth.SignUpVOInput;
 import com.prowal.vos.v1.input.user.UserVOInput;
 import com.prowal.vos.v1.output.auth.TokenVO;
@@ -34,7 +34,7 @@ public class SignUpAuthUseCase {
 			throw new EntityExistsException("Username '" + data.getUserName() + "' already exists!");
 		}
 
-		UserVOInput userVOInput = DozerMapper.parseObject(data, UserVOInput.class);
+		UserVOInput userVOInput = ModelMapperMaping.parseObject(data, UserVOInput.class);
 
 		String encondedPassword = authGateway.getEncondedPassword(data.getPassword());
 
@@ -42,7 +42,7 @@ public class SignUpAuthUseCase {
 
 		userVO = userGateway.create(userVOInput);
 
-		return authGateway.signin(userVO.getUserName(), data.getPassword());
+		return authGateway.signin(userVO.getUsername(), data.getPassword());
 	}
 
 }

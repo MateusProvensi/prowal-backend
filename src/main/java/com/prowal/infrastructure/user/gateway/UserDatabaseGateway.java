@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.prowal.entities.user.gateway.UserGateway;
 import com.prowal.infrastructure.config.db.repositories.UserRepository;
 import com.prowal.infrastructure.config.db.schema.user.UserSchema;
-import com.prowal.infrastructure.config.mapper.DozerMapper;
+import com.prowal.infrastructure.config.mapper.ModelMapperMaping;
 import com.prowal.vos.v1.input.user.UserVOInput;
 import com.prowal.vos.v1.output.user.UserVOOutput;
 
@@ -23,11 +23,11 @@ public class UserDatabaseGateway implements UserGateway, UserDetailsService {
 	
 	@Override
 	public UserVOOutput create(UserVOInput userVO) {
-		UserSchema entity = DozerMapper.parseObject(userVO, UserSchema.class);
+		UserSchema entity = ModelMapperMaping.parseObject(userVO, UserSchema.class);
 
 		UserSchema persistedEntity = userRepository.save(entity);
 		
-		UserVOOutput vo = DozerMapper.parseObject(persistedEntity, UserVOOutput.class);
+		UserVOOutput vo = ModelMapperMaping.parseObject(persistedEntity, UserVOOutput.class);
 
 		// vo.add(linkTo(methodOn(UserController.class).findById(vo.getKey())).withSelfRel());
 		
@@ -36,14 +36,14 @@ public class UserDatabaseGateway implements UserGateway, UserDetailsService {
 
 	@Override
 	public UserVOOutput findByUsername(String username) {
-		UserSchema user = userRepository.findByUserName(username);
+		UserSchema user = userRepository.findByUsername(username);
 
-		return DozerMapper.parseObject(user, UserVOOutput.class);
+		return ModelMapperMaping.parseObject(user, UserVOOutput.class);
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserSchema user = userRepository.findByUserName(username);
+		UserSchema user = userRepository.findByUsername(username);
 
 		if (user == null) {
 			throw new UsernameNotFoundException("Username " + username + " not found!");

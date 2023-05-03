@@ -1,4 +1,4 @@
-package com.prowal.infrastructure.config.db.schema.category;
+package com.prowal.infrastructure.config.db.schema.account;
 
 import java.io.Serializable;
 
@@ -6,8 +6,6 @@ import com.prowal.infrastructure.config.db.schema.user.UserSchema;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,28 +15,24 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "categories")
-public class CategorySchema implements Serializable {
+@Table(name = "accounts")
+public class AccountSchema implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categories_sequence")
-	@SequenceGenerator(name = "categories_sequence", sequenceName = "categories_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_sequence")
+	@SequenceGenerator(name = "accounts_sequence", sequenceName = "accounts_sequence", allocationSize = 1)
 	private Long id;
 
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "type")
-	@Enumerated(EnumType.ORDINAL)
-	private TypeCategory type;
-
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private UserSchema user;
 
-	public CategorySchema() {
+	public AccountSchema() {
 	}
 
 	public Long getId() {
@@ -55,14 +49,6 @@ public class CategorySchema implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public TypeCategory getType() {
-		return type;
-	}
-
-	public void setType(TypeCategory type) {
-		this.type = type;
 	}
 
 	public UserSchema getUser() {

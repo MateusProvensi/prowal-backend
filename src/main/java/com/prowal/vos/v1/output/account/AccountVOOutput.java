@@ -1,14 +1,13 @@
-package com.prowal.vos.v1.output.category;
+package com.prowal.vos.v1.output.account;
 
 import java.io.Serializable;
 
 import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.prowal.infrastructure.config.db.schema.category.TypeCategory;
 import com.prowal.vos.v1.output.user.UserVOOutput;
 
-public class CategoryVOOutput extends RepresentationModel<CategoryVOOutput> implements Serializable {
+public class AccountVOOutput extends RepresentationModel<AccountVOOutput> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,8 +15,6 @@ public class CategoryVOOutput extends RepresentationModel<CategoryVOOutput> impl
 	private Long key;
 
 	private String description;
-
-	private TypeCategory type;
 
 	private UserVOOutput user;
 
@@ -35,14 +32,6 @@ public class CategoryVOOutput extends RepresentationModel<CategoryVOOutput> impl
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public TypeCategory getType() {
-		return type;
-	}
-
-	public void setType(TypeCategory type) {
-		this.type = type;
 	}
 
 	public UserVOOutput getUser() {

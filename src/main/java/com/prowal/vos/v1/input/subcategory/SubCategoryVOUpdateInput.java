@@ -1,31 +1,25 @@
-package com.prowal.vos.v1.input.category;
+package com.prowal.vos.v1.input.subcategory;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prowal.infrastructure.config.db.schema.category.TypeCategory;
-import com.prowal.vos.v1.input.ids.UserIdInput;
+import com.prowal.vos.v1.input.ids.CategoryIdInput;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class CategoryVOUpdateInput implements Serializable {
+public class SubCategoryVOUpdateInput implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
 	private Long id;
-	
+
 	@NotNull(message = "Description should not be null")
 	@NotBlank(message = "Description should not be blank")
 	private String description;
 
-	@JsonIgnore
-	private UserIdInput user;
-
-	@NotNull(message = "Type should not be null")
-	private TypeCategory type;
-	
+	private CategoryIdInput category;
 
 	public Long getId() {
 		return id;
@@ -33,14 +27,6 @@ public class CategoryVOUpdateInput implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public UserIdInput getUser() {
-		return user;
-	}
-
-	public void setUser(UserIdInput user) {
-		this.user = user;
 	}
 
 	public String getDescription() {
@@ -51,11 +37,12 @@ public class CategoryVOUpdateInput implements Serializable {
 		this.description = description;
 	}
 
-	public TypeCategory getType() {
-		return type;
+	public CategoryIdInput getCategory() {
+		return category;
 	}
 
-	public void setType(TypeCategory type) {
-		this.type = type;
+	public void setCategory(CategoryIdInput category) {
+		this.category = category;
 	}
+
 }

@@ -28,7 +28,7 @@ public class UserSchema implements UserDetails, Serializable {
 	private Long id;
 
 	@Column(name = "user_name", unique = true)
-	private String userName;
+	private String username;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -66,7 +66,7 @@ public class UserSchema implements UserDetails, Serializable {
 
 	@Override
 	public String getUsername() {
-		return this.userName;
+		return this.username;
 	}
 
 	@Override
@@ -97,8 +97,8 @@ public class UserSchema implements UserDetails, Serializable {
 		this.id = id;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getFirstName() {
@@ -156,7 +156,7 @@ public class UserSchema implements UserDetails, Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, firstName, id,
-				lastName, password, userName);
+				lastName, password, username);
 	}
 
 	@Override
@@ -173,6 +173,6 @@ public class UserSchema implements UserDetails, Serializable {
 				&& Objects.equals(credentialsNonExpired, other.credentialsNonExpired)
 				&& Objects.equals(enabled, other.enabled) && Objects.equals(firstName, other.firstName)
 				&& Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(password, other.password) && Objects.equals(userName, other.userName);
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 }

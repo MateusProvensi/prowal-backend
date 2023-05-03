@@ -7,19 +7,18 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.dozermapper.core.Mapping;
 
 public class UserVOOutput extends RepresentationModel<UserVOOutput> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Mapping(value = "id")
+//	@Mapping(value = "id")
 	@JsonProperty(value = "id")
 	private Long key;
 	
-	@Mapping(value = "userName")
+//	@Mapping(value = "userName")
 	@JsonProperty(value = "userName")
-	private String userName;
+	private String username;
 	private String firstName;
 	private String lastName;
 	
@@ -37,12 +36,12 @@ public class UserVOOutput extends RepresentationModel<UserVOOutput> implements S
 		this.key = key;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	public String getFirstName() {
@@ -73,7 +72,7 @@ public class UserVOOutput extends RepresentationModel<UserVOOutput> implements S
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(firstName, key, lastName, password, userName);
+		result = prime * result + Objects.hash(firstName, key, lastName, password, username);
 		return result;
 	}
 
@@ -88,6 +87,6 @@ public class UserVOOutput extends RepresentationModel<UserVOOutput> implements S
 		UserVOOutput other = (UserVOOutput) obj;
 		return Objects.equals(firstName, other.firstName) && Objects.equals(key, other.key)
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
-				&& Objects.equals(userName, other.userName);
+				&& Objects.equals(username, other.username);
 	}
 }

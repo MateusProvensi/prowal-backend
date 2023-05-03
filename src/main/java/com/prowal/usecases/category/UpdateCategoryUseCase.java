@@ -33,7 +33,7 @@ public class UpdateCategoryUseCase {
 			throw new UserDoesNotTheSameOfTheEntity("The user does not the same of the entity");
 		}
 		
-		categoryVOUpdateInput.setKey(categoryVOOutput.getKey());
+		categoryVOUpdateInput.setId(categoryVOOutput.getKey());
 		categoryVOUpdateInput.setUser(new UserIdInput(userIdCategoryChange));
 		
 		categoryGateway.updateCategory(categoryVOUpdateInput);

@@ -3,11 +3,17 @@ package com.prowal.infrastructure.config.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.dozermapper.core.DozerBeanMapperBuilder;
-import com.github.dozermapper.core.Mapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
-public class DozerMapper {
-	private static Mapper mapper = DozerBeanMapperBuilder.create().build();
+@Component
+public class ModelMapperMaping {
+	
+	private static ModelMapper mapper;
+	
+	public ModelMapperMaping(ModelMapper mapper) {
+		ModelMapperMaping.mapper = mapper;
+	}
 
 	public static <O, D> D parseObject(O origin, Class<D> destination) {
 		if (origin == null)

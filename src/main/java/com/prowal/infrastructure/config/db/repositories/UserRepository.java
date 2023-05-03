@@ -11,6 +11,6 @@ import com.prowal.infrastructure.config.db.schema.user.UserSchema;
 public interface UserRepository extends JpaRepository<UserSchema, Long>{
 
 	@Query("SELECT u FROM UserSchema u "
-			+ "WHERE u.userName = :userName")
-	UserSchema findByUserName(@Param("userName") String userName);
+			+ "WHERE u.username = :username")
+	UserSchema findByUsername(@Param("username") String username);
 }
