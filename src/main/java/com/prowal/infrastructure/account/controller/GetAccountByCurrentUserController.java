@@ -19,7 +19,7 @@ public class GetAccountByCurrentUserController {
 		this.getAccountsByUserIdUseCase = getAccountsByUserIdUseCase;
 	}
 	
-	@GetMapping(path = "api/accounts/current-user/all")
+	@GetMapping(path = "api/v1/accounts/current-user/all")
 	public ResponseEntity<List<AccountVOOutput>> getAllAccountsByCurrentUser() {
 		List<AccountVOOutput> accounts = getAccountsByUserIdUseCase.execute();
 		

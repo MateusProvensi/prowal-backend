@@ -17,7 +17,7 @@ public class DeleteSubCategoryByIdController {
 		this.deleteCategoryIdUseCase = deleteCategoryIdUseCase;
 	}
 
-	@DeleteMapping(path = "api/subcategories/{idSubCategory}")
+	@DeleteMapping(path = "api/v1/subcategories/{idSubCategory}")
 	public ResponseEntity<Void> deleteCategory(@PathVariable(name = "idSubCategory") Long id) {
 		deleteCategoryIdUseCase.execute(id);
 		

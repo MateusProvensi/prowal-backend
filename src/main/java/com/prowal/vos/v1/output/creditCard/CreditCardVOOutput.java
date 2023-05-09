@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.output.creditCard;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -20,6 +21,8 @@ public class CreditCardVOOutput extends RepresentationModel<CreditCardVOOutput> 
 
 	private String invoiceDate;
 
+	private BigDecimal limitValue;
+
 	private String dueDate;
 
 	private AccountVOOutput account;
@@ -30,6 +33,14 @@ public class CreditCardVOOutput extends RepresentationModel<CreditCardVOOutput> 
 
 	public void setKey(Long key) {
 		this.key = key;
+	}
+
+	public BigDecimal getLimitValue() {
+		return limitValue;
+	}
+
+	public void setLimitValue(BigDecimal limitValue) {
+		this.limitValue = limitValue;
 	}
 
 	public String getDescription() {

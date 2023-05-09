@@ -1,6 +1,7 @@
 package com.prowal.infrastructure.config.db.schema.creditCard;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.prowal.infrastructure.config.db.schema.account.AccountSchema;
 
@@ -24,11 +25,14 @@ public class CreditCardSchema implements Serializable {
 	@SequenceGenerator(name = "credit_card_sequence", sequenceName = "credit_card_sequence", allocationSize = 1)
 	private Long id;
 
-	@Column
+	@Column(name = "description")
 	private String description;
 
 	@Column(name = "final_numbers")
 	private String finalNumbers;
+
+	@Column(name = "limit_value")
+	private BigDecimal limitValue;
 
 	@Column(name = "invoice_date")
 	private String invoiceDate;
@@ -42,6 +46,14 @@ public class CreditCardSchema implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public BigDecimal getLimitValue() {
+		return limitValue;
+	}
+
+	public void setLimitValue(BigDecimal limitValue) {
+		this.limitValue = limitValue;
 	}
 
 	public void setId(Long id) {

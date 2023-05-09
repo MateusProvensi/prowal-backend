@@ -20,7 +20,7 @@ public class CreateSubCategoryController {
 		this.createSubCategoryUseCase = createSubCategoryUseCase;
 	}
 
-	@PostMapping(path = "api/subcategories")
+	@PostMapping(path = "api/v1/subcategories")
 	public ResponseEntity<Void> createSubCategory(@RequestBody @Valid SubCategoryVOCreateInput categoryVOCreateInput) {
 		createSubCategoryUseCase.execute(categoryVOCreateInput);
 

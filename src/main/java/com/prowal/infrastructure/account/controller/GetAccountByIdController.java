@@ -18,7 +18,7 @@ public class GetAccountByIdController {
 		this.getAccountByIdUseCase = getAccountByIdUseCase;
 	}
 	
-	@GetMapping(path = "api/accounts/{accountId}")
+	@GetMapping(path = "api/v1/accounts/{accountId}")
 	public ResponseEntity<AccountVOOutput> getAccountById(@PathVariable(name = "accountId") Long accountId) {
 		AccountVOOutput accountVOOutput = getAccountByIdUseCase.execute(accountId);
 		

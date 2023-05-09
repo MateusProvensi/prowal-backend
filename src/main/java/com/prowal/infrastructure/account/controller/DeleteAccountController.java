@@ -17,7 +17,7 @@ public class DeleteAccountController {
 		this.deleteAccountByIdUseCase = deleteAccountByIdUseCase;
 	}
 	
-	@DeleteMapping(path = "api/accounts/{accountId}")
+	@DeleteMapping(path = "api/v1/accounts/{accountId}")
 	public ResponseEntity<Void> deleteAccount(@PathVariable(name = "accountId") Long accountId) {
 		deleteAccountByIdUseCase.execute(accountId);
 		

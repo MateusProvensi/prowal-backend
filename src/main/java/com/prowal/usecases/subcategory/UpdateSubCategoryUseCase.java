@@ -31,16 +31,16 @@ public class UpdateSubCategoryUseCase {
 
 		SubCategoryVOOutput subCategory = subCategoryGateway.findById(idSubCategory);
 		
-		Long categoryIdToFind = subCategory.getCategory().getKey();
-		Long categoryIdToFindInsideVOAlter = subCategoryVOUpdateInput.getCategory().getId();
+		Long accountIdToFind = subCategory.getCategory().getKey();
+		Long accountIdToFindInsideVOAlter = subCategoryVOUpdateInput.getCategory().getId();
 		
-		CategoryVOOutput categoryVOOutput = categoryGateway.findById(categoryIdToFind);
-		CategoryVOOutput categoryVOOutputInTheSubCategoryToAlter = categoryGateway.findById(categoryIdToFindInsideVOAlter);
+		CategoryVOOutput accountVOOutput = categoryGateway.findById(accountIdToFind);
+		CategoryVOOutput accountVOOutputInTheSubCategoryToAlter = categoryGateway.findById(accountIdToFindInsideVOAlter);
 
-		Long userIdCategory = categoryVOOutput.getUser().getKey();
-		Long userIdCategoryInsideVOAlter = categoryVOOutputInTheSubCategoryToAlter.getUser().getKey();
+		Long userIdAccount = accountVOOutput.getUser().getKey();
+		Long userIdAccountInsideVOAlter = accountVOOutputInTheSubCategoryToAlter.getUser().getKey();
 		
-		if (userId != userIdCategory || userId != userIdCategoryInsideVOAlter) {
+		if (userId != userIdAccount || userId != userIdAccountInsideVOAlter) {
 			throw new UserDoesNotTheSameOfTheEntity("The user of this category is not the same of the current user");
 		}
 

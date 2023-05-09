@@ -21,7 +21,7 @@ public class UpdateAccountController {
 		this.updateAccountUseCase = updateAccountUseCase;
 	}
 
-	@PutMapping(path = "api/accounts/{accountId}")
+	@PutMapping(path = "api/v1/accounts/{accountId}")
 	public ResponseEntity<Void> updateAccount(
 			@PathVariable(name = "accountId") Long accountId,
 			@RequestBody @Valid AccountVOUpdateInput accountVOUpdateInput) {

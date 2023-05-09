@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.input.creditCard;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prowal.vos.v1.input.ids.AccountIdInput;
@@ -14,7 +15,7 @@ public class CreditCardVOUpdateInput implements Serializable {
 
 	@JsonIgnore
 	private Long id;
-	
+
 	@NotNull(message = "Description should not be null")
 	@NotBlank(message = "Description should not be blank")
 	private String description;
@@ -27,13 +28,31 @@ public class CreditCardVOUpdateInput implements Serializable {
 	@NotBlank(message = "Invoice Date should not be blank")
 	private String invoiceDate;
 
+	@NotNull(message = "Limit Value should not be null")
+	private BigDecimal limitValue;
+
 	@NotNull(message = "Due Date should not be null")
 	@NotBlank(message = "Due Date should not be blank")
 	private String dueDate;
 
 	@NotNull(message = "Account should not be null")
-	@NotBlank(message = "Account should not be blank")
 	private AccountIdInput account;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public BigDecimal getLimitValue() {
+		return limitValue;
+	}
+
+	public void setLimitValue(BigDecimal limitValue) {
+		this.limitValue = limitValue;
+	}
 
 	public String getDescription() {
 		return description;

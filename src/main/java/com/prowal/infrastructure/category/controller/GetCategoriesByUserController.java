@@ -19,7 +19,7 @@ public class GetCategoriesByUserController {
 		this.getCategoriesByUserUseCase = getCategoriesByUserUseCase;
 	}
 	
-	@GetMapping(path = "api/categories/current-user/all")
+	@GetMapping(path = "api/v1/categories/current-user/all")
 	public ResponseEntity<List<CategoryVOOutput>> getCategoriesFromCurrentUser() {
 		List<CategoryVOOutput> categories = getCategoriesByUserUseCase.execute();
 		

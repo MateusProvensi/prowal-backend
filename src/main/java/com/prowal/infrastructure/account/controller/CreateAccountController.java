@@ -20,7 +20,7 @@ public class CreateAccountController {
 		this.createAccountUseCase = createAccountUseCase;
 	}
 
-	@PostMapping(path = "api/accounts")
+	@PostMapping(path = "api/v1/accounts")
 	public ResponseEntity<Void> createAnAccount(@RequestBody @Valid AccountVOCreateInput accountVOCreateInput) {
 		createAccountUseCase.execute(accountVOCreateInput);
 		

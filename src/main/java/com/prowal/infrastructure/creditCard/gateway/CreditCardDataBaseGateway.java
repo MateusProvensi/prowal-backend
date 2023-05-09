@@ -29,7 +29,7 @@ public class CreditCardDataBaseGateway implements CreditCardGateway {
 		Optional<CreditCardSchema> possibleCreditCard = creditCardRepository.findById(id);
 
 		CreditCardVOOutput creditCardVO = possibleCreditCard
-				.map(card -> ModelMapperMaping.parseObject(CreditCardSchema.class, CreditCardVOOutput.class))
+				.map(card -> ModelMapperMaping.parseObject(card, CreditCardVOOutput.class))
 				.orElseThrow(() -> new EntityExistsException("The credit card with ID = " + id + " does not exists."));
 
 		return creditCardVO;

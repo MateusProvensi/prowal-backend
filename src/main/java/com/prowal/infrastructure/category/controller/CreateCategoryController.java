@@ -20,7 +20,7 @@ public class CreateCategoryController {
 		this.createCategoryUseCase = createCategoryUseCase;
 	}
 	
-	@PostMapping(path = "api/categories")
+	@PostMapping(path = "api/v1/categories")
 	public ResponseEntity<Void> create(@RequestBody @Valid CategoryVOCreateInput categoryInput) {
 		createCategoryUseCase.execute(categoryInput);
 		

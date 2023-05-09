@@ -21,7 +21,7 @@ public class GetSubCategoriesByCategoryIdController {
 		this.getSubCategoriesByCategoryIdUseCase = getSubCategoriesByCategoryIdUseCase;
 	}
 
-	@GetMapping(path = "api/subcategories/category/{idCategory}")
+	@GetMapping(path = "api/v1/subcategories/category/{idCategory}")
 	public ResponseEntity<List<SubCategoryVOOutput>> getSubCategoriesByCategory(
 			@PathVariable(name = "idCategory") Long idCategory) {
 		List<SubCategoryVOOutput> subcategories = getSubCategoriesByCategoryIdUseCase.execute(idCategory);

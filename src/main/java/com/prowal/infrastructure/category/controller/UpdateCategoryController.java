@@ -20,7 +20,7 @@ public class UpdateCategoryController {
 		this.updateCategoryUseCase = updateCategoryUseCase;
 	}
 
-	@PutMapping(path = "api/categories/{idCategory}")
+	@PutMapping(path = "api/v1/categories/{idCategory}")
 	public ResponseEntity<Void> update(
 			@PathVariable(name = "idCategory") Long idCategory,
 			@RequestBody @Valid CategoryVOUpdateInput categoryInput) {

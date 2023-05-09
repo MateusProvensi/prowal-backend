@@ -21,7 +21,7 @@ public class UpdateSubCategoryController {
 		this.updateSubCategoryUseCase = updateSubCategoryUseCase;
 	}
 
-	@PutMapping(path = "api/subcategories/{idSubCategory}")
+	@PutMapping(path = "api/v1/subcategories/{idSubCategory}")
 	public ResponseEntity<Void> getSubCategoryById(
 			@PathVariable(name = "idSubCategory") Long idSubCategory,
 			@RequestBody @Valid SubCategoryVOUpdateInput subCategoryInput) {
