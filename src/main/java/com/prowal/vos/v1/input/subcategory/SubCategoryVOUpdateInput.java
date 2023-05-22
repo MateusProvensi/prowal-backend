@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.input.subcategory;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prowal.vos.v1.input.ids.CategoryIdInput;
@@ -21,12 +22,23 @@ public class SubCategoryVOUpdateInput implements Serializable {
 
 	private CategoryIdInput category;
 
+	@JsonIgnore
+	private Instant createdAt;
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public String getDescription() {

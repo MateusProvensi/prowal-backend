@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.output.category;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -21,12 +22,42 @@ public class CategoryVOOutput extends RepresentationModel<CategoryVOOutput> impl
 
 	private UserVOOutput user;
 
+	private Boolean enabled;
+
+	private Instant createdAt;
+
+	private Instant updatedAt;
+
 	public Long getKey() {
 		return key;
 	}
 
 	public void setKey(Long key) {
 		this.key = key;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public String getDescription() {

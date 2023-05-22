@@ -4,39 +4,27 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.prowal.entities.account.gateway.AccountGateway;
 import com.prowal.entities.creditCard.gateway.CreditCardGateway;
 import com.prowal.infrastructure.config.db.schema.user.UserSchema;
-import com.prowal.infrastructure.config.exceptions.UserDoesNotTheSameOfTheEntity;
-import com.prowal.vos.v1.output.account.AccountVOOutput;
-import com.prowal.vos.v1.output.creditCard.CreditCardVOOutput;
+import com.prowal.usecases.belongsValidation.CreditCardValidation;
 
 @Service
 public class DeleteCreditCardUseCase {
 
 	private CreditCardGateway creditCardGateway;
-	private AccountGateway accountGateway;
+	private CreditCardValidation creditCardValidation;
 
-	public DeleteCreditCardUseCase(CreditCardGateway creditCardGateway, AccountGateway accountGateway) {
+	public DeleteCreditCardUseCase(CreditCardGateway creditCardGateway, CreditCardValidation creditCardValidation) {
 		super();
 		this.creditCardGateway = creditCardGateway;
-		this.accountGateway = accountGateway;
+		this.creditCardValidation = creditCardValidation;
 	}
 
 	public void execute(Long idCreditCard) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserSchema userDetails = (UserSchema) authentication.getPrincipal();
 
-		Long userId = userDetails.getId();
-		
-		CreditCardVOOutput creditCardVOOutput = creditCardGateway.findById(idCreditCard);
-		Long accountId = creditCardVOOutput.getAccount().getKey();
-
-		AccountVOOutput account = accountGateway.findById(accountId);
-
-		if (account.getUser().getKey() != userId) {
-			throw new UserDoesNotTheSameOfTheEntity("The user of this account is not the same of the current user");
-		}
+		creditCardValidation.verifyIfTheUserEntityIsTheSameOfTheCurrentUser(userDetails, idCreditCard);
 
 		creditCardGateway.deleteCreditCard(idCreditCard);
 	}

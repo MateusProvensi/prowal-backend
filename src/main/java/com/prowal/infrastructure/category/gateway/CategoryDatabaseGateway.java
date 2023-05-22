@@ -1,5 +1,6 @@
 package com.prowal.infrastructure.category.gateway;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import com.prowal.infrastructure.config.mapper.ModelMapperMaping;
 import com.prowal.vos.v1.input.category.CategoryVOCreateInput;
 import com.prowal.vos.v1.input.category.CategoryVOUpdateInput;
 import com.prowal.vos.v1.output.category.CategoryVOOutput;
+
+import core.FunctionsDateUtils;
 
 @Component
 public class CategoryDatabaseGateway implements CategoryGateway {
@@ -44,15 +47,25 @@ public class CategoryDatabaseGateway implements CategoryGateway {
 	@Override
 	public void createCategory(CategoryVOCreateInput categoryVOInput) {
 		CategorySchema categoryToInsert = ModelMapperMaping.parseObject(categoryVOInput, CategorySchema.class);
+
+		Instant currentTime = FunctionsDateUtils.currentInstantDateTime();
+
+		categoryToInsert.setCreatedAt(currentTime);
+		categoryToInsert.setUpdatedAt(currentTime);
+		categoryToInsert.setEnabled(true);
 		
 		categoryRepository.save(categoryToInsert);
 	}
 
 	@Override
 	public void updateCategory(CategoryVOUpdateInput categoryVOInput) {
-		CategorySchema categoryToInsert = ModelMapperMaping.parseObject(categoryVOInput, CategorySchema.class);
+		CategorySchema categoryToUpdate = ModelMapperMaping.parseObject(categoryVOInput, CategorySchema.class);
 		
-		categoryRepository.save(categoryToInsert);
+		Instant currentTime = FunctionsDateUtils.currentInstantDateTime();
+
+		categoryToUpdate.setUpdatedAt(currentTime);
+		
+		categoryRepository.save(categoryToUpdate);
 	}
 
 	@Override

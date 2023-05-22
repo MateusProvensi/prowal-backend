@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.output.account;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import org.springframework.hateoas.RepresentationModel;
 
@@ -16,6 +17,12 @@ public class AccountVOOutput extends RepresentationModel<AccountVOOutput> implem
 
 	private String description;
 
+	private Boolean enabled;
+
+	private Instant createdAt;
+
+	private Instant updatedAt;
+
 	private UserVOOutput user;
 
 	public Long getKey() {
@@ -26,8 +33,32 @@ public class AccountVOOutput extends RepresentationModel<AccountVOOutput> implem
 		this.key = key;
 	}
 
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getDescription() {
 		return description;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public void setDescription(String description) {

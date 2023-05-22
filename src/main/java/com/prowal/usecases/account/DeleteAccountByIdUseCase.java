@@ -6,32 +6,25 @@ import org.springframework.stereotype.Service;
 
 import com.prowal.entities.account.gateway.AccountGateway;
 import com.prowal.infrastructure.config.db.schema.user.UserSchema;
-import com.prowal.infrastructure.config.exceptions.UserDoesNotTheSameOfTheEntity;
-import com.prowal.vos.v1.output.account.AccountVOOutput;
+import com.prowal.usecases.belongsValidation.AccountValidation;
 
 @Service
 public class DeleteAccountByIdUseCase {
 
 	private final AccountGateway accountGateway;
+	private final AccountValidation accountValidation;
 
-	public DeleteAccountByIdUseCase(AccountGateway accountGateway) {
+	public DeleteAccountByIdUseCase(AccountGateway accountGateway, AccountValidation accountValidation) {
 		this.accountGateway = accountGateway;
+		this.accountValidation = accountValidation;
 	}
 
-	public void execute(Long id) {
+	public void execute(Long idCategory) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserSchema userDetails = (UserSchema) authentication.getPrincipal();
 
-		Long userId = userDetails.getId();
+		accountValidation.verifyIfTheUserEntityIsTheSameOfTheCurrentUser(userDetails, idCategory);
 
-		AccountVOOutput accountVOOutput = accountGateway.findById(id);
-
-		Long userIdAccountToDelete = accountVOOutput.getUser().getKey();
-
-		if (userId != userIdAccountToDelete) {
-			throw new UserDoesNotTheSameOfTheEntity("The user does not the same of the entity");
-		}
-
-		accountGateway.deleteAccount(accountVOOutput.getKey());
+		accountGateway.deleteAccount(idCategory);
 	}
 }

@@ -2,6 +2,7 @@ package com.prowal.vos.v1.input.creditCard;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prowal.vos.v1.input.ids.AccountIdInput;
@@ -38,12 +39,23 @@ public class CreditCardVOUpdateInput implements Serializable {
 	@NotNull(message = "Account should not be null")
 	private AccountIdInput account;
 
+	@JsonIgnore
+	private Instant createdAt;
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public BigDecimal getLimitValue() {

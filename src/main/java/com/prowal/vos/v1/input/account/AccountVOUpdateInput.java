@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.input.account;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prowal.vos.v1.input.ids.UserIdInput;
@@ -19,8 +20,14 @@ public class AccountVOUpdateInput implements Serializable {
 	@NotBlank(message = "Description should not be blank")
 	private String description;
 
+	@NotNull(message = "Enabled property should not be null")
+	private Boolean enabled;
+
 	@JsonIgnore
 	private UserIdInput user;
+
+	@JsonIgnore
+	private Instant createdAt;
 
 	public Long getId() {
 		return id;
@@ -28,6 +35,22 @@ public class AccountVOUpdateInput implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public UserIdInput getUser() {

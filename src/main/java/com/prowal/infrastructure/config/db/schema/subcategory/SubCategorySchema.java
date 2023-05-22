@@ -1,6 +1,7 @@
 package com.prowal.infrastructure.config.db.schema.subcategory;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import com.prowal.infrastructure.config.db.schema.category.CategorySchema;
 
@@ -32,6 +33,15 @@ public class SubCategorySchema implements Serializable {
 	@JoinColumn(name = "category_id")
 	private CategorySchema category;
 
+	@Column(name = "enabled")
+	private Boolean enabled;
+
+	@Column(name = "created_at", updatable = false)
+	private Instant createdAt;
+
+	@Column(name = "updated_at")
+	private Instant updatedAt;
+
 	public SubCategorySchema() {
 	}
 
@@ -57,5 +67,29 @@ public class SubCategorySchema implements Serializable {
 
 	public void setCategory(CategorySchema category) {
 		this.category = category;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 }

@@ -1,5 +1,7 @@
 package com.prowal.infrastructure.user.gateway;
 
+import java.time.Instant;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,6 +13,8 @@ import com.prowal.infrastructure.config.db.schema.user.UserSchema;
 import com.prowal.infrastructure.config.mapper.ModelMapperMaping;
 import com.prowal.vos.v1.input.user.UserVOInput;
 import com.prowal.vos.v1.output.user.UserVOOutput;
+
+import core.FunctionsDateUtils;
 
 @Component
 public class UserDatabaseGateway implements UserGateway, UserDetailsService {
@@ -24,11 +28,16 @@ public class UserDatabaseGateway implements UserGateway, UserDetailsService {
 	@Override
 	public UserVOOutput create(UserVOInput userVO) {
 		UserSchema entity = ModelMapperMaping.parseObject(userVO, UserSchema.class);
-
+		
+		Instant currentTime = FunctionsDateUtils.currentInstantDateTime();
+		
+		entity.setCreatedAt(currentTime);
+		entity.setUpdatedAt(currentTime);
+		
 		UserSchema persistedEntity = userRepository.save(entity);
 		
 		UserVOOutput vo = ModelMapperMaping.parseObject(persistedEntity, UserVOOutput.class);
-
+		
 		// vo.add(linkTo(methodOn(UserController.class).findById(vo.getKey())).withSelfRel());
 		
 		return vo;

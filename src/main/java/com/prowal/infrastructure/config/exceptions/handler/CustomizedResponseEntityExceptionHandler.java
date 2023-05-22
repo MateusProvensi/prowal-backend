@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.prowal.infrastructure.config.exceptions.EntityDoesNotTheSameException;
 import com.prowal.infrastructure.config.exceptions.EntityExistsException;
 import com.prowal.infrastructure.config.exceptions.ExceptionResponse;
 import com.prowal.infrastructure.config.exceptions.FieldValidationException;
@@ -23,6 +24,7 @@ import com.prowal.infrastructure.config.exceptions.InvalidJwtAuthenticationExcep
 import com.prowal.infrastructure.config.exceptions.RequiredObjectIsNullException;
 import com.prowal.infrastructure.config.exceptions.ResourceNotFoundException;
 import com.prowal.infrastructure.config.exceptions.UserDoesNotTheSameOfTheEntity;
+import com.prowal.infrastructure.config.exceptions.WrongTypeEnumException;
 import com.prowal.infrastructure.config.exceptions.utilExceptionClass.Field;
 
 @ControllerAdvice
@@ -50,6 +52,26 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
 	@ExceptionHandler(EntityExistsException.class)
 	public final ResponseEntity<ExceptionResponse> handleEntityExistsExceptionExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+				new Date(),
+				ex.getMessage(),
+				request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(EntityDoesNotTheSameException.class)
+	public final ResponseEntity<ExceptionResponse> handleEntityDoesNotTheSameExceptionExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+				new Date(),
+				ex.getMessage(),
+				request.getDescription(false));
+		
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(WrongTypeEnumException.class)
+	public final ResponseEntity<ExceptionResponse> handleWrongTypeEnumExceptionExceptions(Exception ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(
 				new Date(),
 				ex.getMessage(),

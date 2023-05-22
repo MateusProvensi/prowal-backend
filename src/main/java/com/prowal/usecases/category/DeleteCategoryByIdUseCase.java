@@ -6,32 +6,25 @@ import org.springframework.stereotype.Service;
 
 import com.prowal.entities.category.gateway.CategoryGateway;
 import com.prowal.infrastructure.config.db.schema.user.UserSchema;
-import com.prowal.infrastructure.config.exceptions.UserDoesNotTheSameOfTheEntity;
-import com.prowal.vos.v1.output.category.CategoryVOOutput;
+import com.prowal.usecases.belongsValidation.CategoryValidation;
 
 @Service
 public class DeleteCategoryByIdUseCase {
 
 	private CategoryGateway categoryGateway;
+	private CategoryValidation categoryValidation;
 
-	public DeleteCategoryByIdUseCase(CategoryGateway categoryGateway) {
+	public DeleteCategoryByIdUseCase(CategoryGateway categoryGateway, CategoryValidation categoryValidation) {
 		this.categoryGateway = categoryGateway;
+		this.categoryValidation = categoryValidation;
 	}
-	
-	public void execute(Long id) {
+
+	public void execute(Long idCategory) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserSchema userDetails = (UserSchema) authentication.getPrincipal();
 
-		Long userId = userDetails.getId();
+		categoryValidation.verifyIfTheUserEntityIsTheSameOfTheCurrentUser(userDetails, idCategory);
 
-		CategoryVOOutput categoryVOOutput = categoryGateway.findById(id);
-
-		Long userIdCategoryChange = categoryVOOutput.getUser().getKey();
-
-		if (userId != userIdCategoryChange) {
-			throw new UserDoesNotTheSameOfTheEntity("The user does not the same of the entity");
-		}
-		
-		categoryGateway.deleteCategory(categoryVOOutput.getKey());
+		categoryGateway.deleteCategory(idCategory);
 	}
 }

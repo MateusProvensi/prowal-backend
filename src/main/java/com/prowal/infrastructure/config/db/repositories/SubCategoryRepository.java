@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.prowal.infrastructure.config.db.schema.subcategory.SubCategorySchema;
 
 @Repository
-public interface SubCategoryRepository extends JpaRepository<SubCategorySchema, Long>{
+public interface SubCategoryRepository extends JpaRepository<SubCategorySchema, Long> {
 
 	@Query("SELECT s FROM SubCategorySchema s INNER JOIN s.category c WHERE c.id = :categoryId")
 	List<SubCategorySchema> findByCategoryId(@Param("categoryId") Long categoryId);

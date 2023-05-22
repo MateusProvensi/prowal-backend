@@ -1,6 +1,7 @@
 package com.prowal.infrastructure.config.db.schema.user;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -50,6 +51,12 @@ public class UserSchema implements UserDetails, Serializable {
 
 	@Column(name = "enabled")
 	private Boolean enabled = true;
+
+	@Column(name = "created_at", updatable = false)
+	private Instant createdAt;
+
+	@Column(name = "updated_at")
+	private Instant updatedAt;
 
 	public UserSchema() {
 	}
@@ -153,10 +160,35 @@ public class UserSchema implements UserDetails, Serializable {
 		this.password = password;
 	}
 
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, firstName, id,
-				lastName, password, username);
+		return Objects
+				.hash(
+						accountNonExpired,
+						accountNonLocked,
+						credentialsNonExpired,
+						enabled,
+						firstName,
+						id,
+						lastName,
+						password,
+						username);
 	}
 
 	@Override

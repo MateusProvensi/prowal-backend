@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS "users" (
   "account_non_locked" BOOLEAN DEFAULT true,
   "credentials_non_expired" BOOLEAN DEFAULT true,
   "enabled" BOOLEAN DEFAULT true,
+  "created_at" TIMESTAMPTZ NOT NULL,
+  "updated_at" TIMESTAMPTZ NOT NULL,
 
   CONSTRAINT "pk_user_id" PRIMARY KEY ("id")
 );

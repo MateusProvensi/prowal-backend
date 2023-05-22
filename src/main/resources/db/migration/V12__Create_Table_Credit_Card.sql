@@ -5,6 +5,9 @@ CREATE TABLE IF NOT EXISTS "credit_cards" (
   "limit_value" NUMERIC(10, 2)  NOT NULL,
   "invoice_date" VARCHAR(2)  NOT NULL,
   "due_date" VARCHAR(2) NOT NULL,
+  "enabled" BOOLEAN NOT NULL,
+  "created_at" TIMESTAMPTZ NOT NULL,
+  "updated_at" TIMESTAMPTZ NOT NULL,
 
   "account_id" BIGINT NOT NULL,
 

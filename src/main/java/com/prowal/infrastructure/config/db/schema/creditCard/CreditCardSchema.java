@@ -2,6 +2,7 @@ package com.prowal.infrastructure.config.db.schema.creditCard;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Instant;
 
 import com.prowal.infrastructure.config.db.schema.account.AccountSchema;
 
@@ -39,6 +40,15 @@ public class CreditCardSchema implements Serializable {
 
 	@Column(name = "due_date")
 	private String dueDate;
+
+	@Column(name = "enabled")
+	private Boolean enabled;
+
+	@Column(name = "created_at", updatable = false)
+	private Instant createdAt;
+
+	@Column(name = "updated_at")
+	private Instant updatedAt;
 
 	@ManyToOne
 	@JoinColumn(name = "account_id")
@@ -98,5 +108,29 @@ public class CreditCardSchema implements Serializable {
 
 	public void setAccount(AccountSchema account) {
 		this.account = account;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 }

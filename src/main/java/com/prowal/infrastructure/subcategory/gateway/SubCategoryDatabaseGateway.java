@@ -1,5 +1,6 @@
 package com.prowal.infrastructure.subcategory.gateway;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import com.prowal.infrastructure.config.mapper.ModelMapperMaping;
 import com.prowal.vos.v1.input.subcategory.SubCategoryVOCreateInput;
 import com.prowal.vos.v1.input.subcategory.SubCategoryVOUpdateInput;
 import com.prowal.vos.v1.output.subcategory.SubCategoryVOOutput;
+
+import core.FunctionsDateUtils;
 
 @Component
 public class SubCategoryDatabaseGateway implements SubCategoryGateway {
@@ -46,15 +49,25 @@ public class SubCategoryDatabaseGateway implements SubCategoryGateway {
 		SubCategorySchema subCategoryToInsert = ModelMapperMaping
 				.parseObject(subCategoryVOCreateInput, SubCategorySchema.class);
 
+		Instant currentTime = FunctionsDateUtils.currentInstantDateTime();
+
+		subCategoryToInsert.setCreatedAt(currentTime);
+		subCategoryToInsert.setUpdatedAt(currentTime);
+		subCategoryToInsert.setEnabled(true);
+		
 		subCategoryRepository.save(subCategoryToInsert);
 	}
 
 	@Override
 	public void updateSubCategory(SubCategoryVOUpdateInput subCategoryVOUpdateInput) {
-		SubCategorySchema subCategoryToInsert = ModelMapperMaping
+		SubCategorySchema subCategoryToUpdate = ModelMapperMaping
 				.parseObject(subCategoryVOUpdateInput, SubCategorySchema.class);
 
-		subCategoryRepository.save(subCategoryToInsert);
+		Instant currentTime = FunctionsDateUtils.currentInstantDateTime();
+
+		subCategoryToUpdate.setUpdatedAt(currentTime);
+		
+		subCategoryRepository.save(subCategoryToUpdate);
 	}
 
 	@Override

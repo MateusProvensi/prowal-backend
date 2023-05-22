@@ -1,6 +1,7 @@
 package com.prowal.vos.v1.output.user;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 import org.springframework.hateoas.RepresentationModel;
@@ -12,18 +13,20 @@ public class UserVOOutput extends RepresentationModel<UserVOOutput> implements S
 
 	private static final long serialVersionUID = 1L;
 
-//	@Mapping(value = "id")
 	@JsonProperty(value = "id")
 	private Long key;
-	
-//	@Mapping(value = "userName")
+
 	@JsonProperty(value = "userName")
 	private String username;
 	private String firstName;
 	private String lastName;
-	
+
 	@JsonIgnore
 	private String password;
+
+	private Instant createdAt;
+
+	private Instant updatedAt;
 
 	public UserVOOutput() {
 	}
@@ -34,6 +37,22 @@ public class UserVOOutput extends RepresentationModel<UserVOOutput> implements S
 
 	public void setKey(Long key) {
 		this.key = key;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public String getUsername() {
