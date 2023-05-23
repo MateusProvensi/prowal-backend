@@ -22,16 +22,16 @@ public class GetCreditCardTransactionsByPeriodAndCreditCardController {
 		super();
 		this.getCreditCardTransactionByPeriodAndCreditCardUseCase = getCreditCardTransactionByPeriodAndCreditCard;
 	}
-	
+
 	@GetMapping(value = "api/v1/credit-card-transaction/card/{idCreditCard}")
 	public ResponseEntity<List<CreditCardTransactionVOOutput>> getTransactionsByPeriod(
-			@RequestParam(name = "dataInicial", required = false) Instant dataInicial,
-			@RequestParam(name = "dataFinal", required = false) Instant dataFinal,
-			@PathVariable(name = "idCreditCard") Long idCreditCard
-			) {
-		
-		List<CreditCardTransactionVOOutput> transactions = getCreditCardTransactionByPeriodAndCreditCardUseCase.execute(dataInicial, dataFinal, idCreditCard);
-		
+			@RequestParam(name = "initialDate", required = false) Instant initialDate,
+			@RequestParam(name = "finalDate", required = false) Instant finalDate,
+			@PathVariable(name = "idCreditCard") Long idCreditCard) {
+
+		List<CreditCardTransactionVOOutput> transactions = getCreditCardTransactionByPeriodAndCreditCardUseCase
+				.execute(initialDate, finalDate, idCreditCard);
+
 		return ResponseEntity.ok(transactions);
 	}
 }

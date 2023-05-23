@@ -53,13 +53,12 @@ public class TransactionSchema implements Serializable {
 	@Column(name = "updated_at")
 	private Instant updatedAt;
 
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "account_primary_id")
 	private AccountSchema primaryAccount;
 
 	@ManyToOne
 	@JoinColumn(name = "account_secondary_id")
-	@NotFound(action = NotFoundAction.IGNORE)
 	private AccountSchema secondaryAccount;
 
 	@ManyToOne

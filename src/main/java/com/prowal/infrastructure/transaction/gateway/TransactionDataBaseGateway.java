@@ -1,5 +1,6 @@
 package com.prowal.infrastructure.transaction.gateway;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -41,11 +42,11 @@ public class TransactionDataBaseGateway implements TransactionGateway {
 	}
 
 	@Override
-	public List<TransactionVoOutput> findByPeriod(Instant initialDate, Instant finalDate) {
-		List<TransactionSchema> transactions = transactionRepository.findByPeriod(initialDate, finalDate);
+	public List<TransactionVoOutput> findByPeriodAndAccount(Instant initialDate, Instant finalDate, Long idAccount) {
+		List<TransactionSchema> transactions = transactionRepository.findByPeriodAndAccount(initialDate, finalDate, idAccount);
 
 		if (transactions.isEmpty()) {
-			throw new EntityExistsException("Do not exists transactions with this credit card or in this period.");
+			throw new EntityExistsException("Do not exists transactions with this account in this period.");
 		}
 
 		return ModelMapperMaping.parseListObjects(transactions, TransactionVoOutput.class);
@@ -101,5 +102,23 @@ public class TransactionDataBaseGateway implements TransactionGateway {
 	@Override
 	public void deleteTransaction(Long id) {
 		transactionRepository.deleteById(id);
+	}
+
+	@Override
+	public BigDecimal getCurrentBalanceToAccount(Long idAccount) {
+		Instant currentTime = FunctionsDateUtils.currentInstantDateTime();
+
+		BigDecimal valueOfIncomes = transactionRepository.findIncomesValueByAccountIdUntilNow(idAccount, currentTime);
+		BigDecimal valueOfTransfersThatThisAccountReceived = transactionRepository.findTransfersValueThatThisAccountReceivedByAccountIdUntilNow(idAccount, currentTime);
+		
+		BigDecimal valueOfExpenses = transactionRepository.findExpensesValueByAccountIdUntilNow(idAccount, currentTime);
+		BigDecimal valueOfTransfersThatThisAccountSent = transactionRepository.findTransfersValueThatThisAccountSentByAccountIdUntilNow(idAccount, currentTime);
+		
+		BigDecimal valueOfIncomesAndReceivedTransfer = valueOfIncomes.add(valueOfTransfersThatThisAccountReceived);
+		BigDecimal valueOfExpensesAndSentTransfer = valueOfExpenses.add(valueOfTransfersThatThisAccountSent);
+		
+		BigDecimal balanceUntilNow = valueOfIncomesAndReceivedTransfer.subtract(valueOfExpensesAndSentTransfer);
+
+		return balanceUntilNow;
 	}
 }

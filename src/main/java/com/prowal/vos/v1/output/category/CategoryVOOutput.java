@@ -5,6 +5,7 @@ import java.time.Instant;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prowal.infrastructure.config.db.schema.category.TypeCategory;
 import com.prowal.vos.v1.output.user.UserVOOutput;
@@ -20,6 +21,7 @@ public class CategoryVOOutput extends RepresentationModel<CategoryVOOutput> impl
 
 	private TypeCategory type;
 
+	@JsonIgnore
 	private UserVOOutput user;
 
 	private Boolean enabled;

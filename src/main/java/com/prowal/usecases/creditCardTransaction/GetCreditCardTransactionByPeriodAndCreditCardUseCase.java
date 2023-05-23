@@ -28,15 +28,15 @@ public class GetCreditCardTransactionByPeriodAndCreditCardUseCase {
 		this.creditCardValidation = creditCardValidation;
 	}
 
-	public List<CreditCardTransactionVOOutput> execute(Instant dataInicial, Instant dataFinal, Long idCreditCard) {
+	public List<CreditCardTransactionVOOutput> execute(Instant initialDate, Instant finalDate, Long idCreditCard) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserSchema userDetails = (UserSchema) authentication.getPrincipal();
 
 		creditCardValidation.verifyIfTheUserEntityIsTheSameOfTheCurrentUser(userDetails, idCreditCard);
 
-		dataInicial = dataInicial == null ? FunctionsDateUtils.currentMonthStartDay() : dataInicial;
-		dataFinal = dataFinal == null ? FunctionsDateUtils.currentMonthFinalDay() : dataFinal;
+		initialDate = initialDate == null ? FunctionsDateUtils.currentMonthStartDay() : initialDate;
+		finalDate = finalDate == null ? FunctionsDateUtils.currentMonthFinalDay() : finalDate;
 
-		return creditCardTransactionGateway.findByCreditCardIdAndPeriod(idCreditCard, dataInicial, dataFinal);
+		return creditCardTransactionGateway.findByCreditCardIdAndPeriod(idCreditCard, initialDate, finalDate);
 	}
 }

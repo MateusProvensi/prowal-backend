@@ -1,10 +1,12 @@
 package com.prowal.vos.v1.output.account;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prowal.vos.v1.output.user.UserVOOutput;
 
@@ -23,7 +25,10 @@ public class AccountVOOutput extends RepresentationModel<AccountVOOutput> implem
 
 	private Instant updatedAt;
 
+	@JsonIgnore
 	private UserVOOutput user;
+
+	private BigDecimal balance;
 
 	public Long getKey() {
 		return key;
@@ -31,6 +36,14 @@ public class AccountVOOutput extends RepresentationModel<AccountVOOutput> implem
 
 	public void setKey(Long key) {
 		this.key = key;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 
 	public Boolean getEnabled() {
